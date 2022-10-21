@@ -7,7 +7,7 @@ namespace Game.Core
         [SerializeField] private Transform target;
         [SerializeField] private float speed;
 
-        private void Update()
+        private void LateUpdate()
         {
             Vector3 pos = target.position;
 
