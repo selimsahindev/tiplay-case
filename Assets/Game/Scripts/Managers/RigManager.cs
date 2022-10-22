@@ -17,12 +17,16 @@ namespace Game.Managers
 
         private void Start()
         {
-            firstFellow.onTriggerEnter.AddListener(OnTriggerEnter);
+            AddNewFellow(firstFellow);
         }
 
         public void AddNewFellow(Fellow newFellow)
         {
             collected.Push(newFellow);
+
+            pistolRig.AddFellowToRig(newFellow);
+
+            newFellow.Collider.enabled = false;
         }
 
         public void RemoveFellow()
@@ -45,7 +49,7 @@ namespace Game.Managers
         {
             Fellow fellow = other.GetComponent<Fellow>();
 
-            if (fellow is not null)
+            if (fellow != null)
             {
                 AddNewFellow(fellow);
             }
