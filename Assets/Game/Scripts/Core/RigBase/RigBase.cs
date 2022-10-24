@@ -1,6 +1,8 @@
-using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using Game.Scriptables;
+using Game.Core.Enums;
 
 namespace Game.Core.RigBase
 {
@@ -10,12 +12,20 @@ namespace Game.Core.RigBase
         [HideInInspector] public bool isUsed = false;
         public Transform position;
         public string poseName;
+        public FellowColorType color;
     }
 
     public class RigBase : MonoBehaviour
     {
         public List<FellowPlacementData> fellowPlaces = new List<FellowPlacementData>();
         public List<Fellow> fellows = new List<Fellow>();
+
+        protected FellowColors_SO colors;
+
+        private void Awake()
+        {
+            colors = Resources.Load<FellowColors_SO>("FellowColors");
+        }
 
         public bool IsFull()
         {
@@ -78,6 +88,7 @@ namespace Game.Core.RigBase
                 seq.Join(fellows[i].transform.DOLocalRotate(Vector3.zero, 0.25f));
                 seq.Play();
 
+                fellows[i].SkinnedMeshRenderer.material.color = colors.GetColor(fellowPlaces[i].color);
                 fellows[i].Animator.SetTrigger(fellowPlaces[i].poseName);
             }
         }

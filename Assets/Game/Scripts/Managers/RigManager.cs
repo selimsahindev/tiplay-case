@@ -14,14 +14,15 @@ namespace Game.Managers
         [SerializeField] private PistolRig pistolRig;
         [SerializeField] private SmgRig smgRig;
 
+        public int FellowCount => collected.Count;
+
         private Stack<Fellow> collected = new Stack<Fellow>();
         private UIManager uiManager;
 
-        public int FellowCount => collected.Count;
-
         private void Awake()
         {
-            uiManager = ServiceProvider.GetManager<UIManager>();   
+            uiManager = ServiceProvider.GetManager<UIManager>();
+
             AddNewFellow(firstFellow);
         }
 

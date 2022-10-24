@@ -118,27 +118,35 @@ MonoBehaviour:
   - isUsed: 0
     position: {fileID: 7802027228131501796}
     poseName: Pose6
+    color: 2
   - isUsed: 0
     position: {fileID: 7802027226838476021}
     poseName: Pose1
+    color: 0
   - isUsed: 0
     position: {fileID: 7802027226848614830}
     poseName: Pose1
+    color: 0
   - isUsed: 0
     position: {fileID: 7802027227861860658}
     poseName: Pose1
+    color: 0
   - isUsed: 0
     position: {fileID: 7802027227806734989}
     poseName: Pose1
+    color: 2
   - isUsed: 0
     position: {fileID: 8889016584433809302}
     poseName: Pose1
+    color: 0
   - isUsed: 0
     position: {fileID: 687116421751578902}
     poseName: Pose5
+    color: 0
   - isUsed: 0
     position: {fileID: 481445065328510919}
     poseName: Pose4
+    color: 3
   fellows: []
 --- !u!1 &7550785325012454880
 GameObject:

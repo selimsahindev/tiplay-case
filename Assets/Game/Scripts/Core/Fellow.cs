@@ -5,29 +5,16 @@ namespace Game.Core
 {
     public class Fellow : MonoBehaviour
     {
-        public Animator Animator
-        {
-            get;
-            private set;
-        }
+        [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+        public SkinnedMeshRenderer SkinnedMeshRenderer => skinnedMeshRenderer;
 
-        public Collider Collider
-        {
-            get;
-            private set;
-        }
-
-        public readonly UnityEvent<Collider> onTriggerEnter = new UnityEvent<Collider>();
+        public Animator Animator { get; private set; }
+        public Collider Collider { get; private set; }
 
         private void Awake()
         {
             Animator = GetComponentInChildren<Animator>();
             Collider = GetComponent<Collider>();
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            onTriggerEnter.Invoke(other);
         }
     }
 }
