@@ -27,5 +27,10 @@ namespace Game.Managers
         {
             get { return GetManager<InputManager>(); }
         }
+
+        public static UIManager GetUIManager
+        {
+            get { return GetManager<UIManager>(); }
+        }
     }
 }

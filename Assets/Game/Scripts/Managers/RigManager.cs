@@ -15,9 +15,13 @@ namespace Game.Managers
         [SerializeField] private SmgRig smgRig;
 
         private Stack<Fellow> collected = new Stack<Fellow>();
+        private UIManager uiManager;
 
-        private void Start()
+        public int FellowCount => collected.Count;
+
+        private void Awake()
         {
+            uiManager = ServiceProvider.GetManager<UIManager>();   
             AddNewFellow(firstFellow);
         }
 
@@ -43,6 +47,9 @@ namespace Game.Managers
             {
                 smgRig.AddFellowToRig(newFellow);
             }
+
+            // Move progress indicator.
+            uiManager.gamePanel.progressUI.MoveArrow(FellowCount);
         }
 
         public void RemoveFellow()

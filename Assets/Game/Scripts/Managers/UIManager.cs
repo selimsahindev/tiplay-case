@@ -11,6 +11,7 @@ namespace Game.Managers
     public class UIManager : MonoBehaviour, IProvidable
     {
         public MainPanel mainPanel;
+        public GamePanel gamePanel;
 
         private void Awake()
         {
@@ -20,11 +21,13 @@ namespace Game.Managers
         private void Start()
         {
             mainPanel.SetActiveImmediately(true);
+            gamePanel.SetActiveImmediately(false);
         }
 
         private void HandleOnGameStart()
         {
             mainPanel.SetActiveSmooth(false);
+            gamePanel.SetActiveSmooth(true);
         }
 
         private void OnEnable()
