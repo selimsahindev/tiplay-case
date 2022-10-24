@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +17,11 @@ namespace Game.Core.RigBase
         public List<FellowPlacementData> fellowPlaces = new List<FellowPlacementData>();
         public List<Fellow> fellows = new List<Fellow>();
 
+        public bool IsFull()
+        {
+            return fellows.Count >= fellowPlaces.Count;
+        }
+
         private FellowPlacementData GetEmptyPlacementData()
         {
             foreach (FellowPlacementData place in fellowPlaces)
@@ -34,6 +38,20 @@ namespace Game.Core.RigBase
         public virtual void AddFellowToRig(Fellow fellow)
         {
             fellows.Add(fellow);
+        }
+
+        public void AddFellowsToRig(List<Fellow> fellows)
+        {
+            this.fellows.AddRange(fellows);
+        }
+
+        public void Transfer(RigBase newRig)
+        {
+            newRig.gameObject.SetActive(true);
+            newRig.AddFellowsToRig(fellows);
+            newRig.Rearrange();
+            fellows.Clear();
+            gameObject.SetActive(false);
         }
 
         protected void Rearrange()

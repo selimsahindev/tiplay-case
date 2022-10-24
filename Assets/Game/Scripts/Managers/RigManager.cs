@@ -12,6 +12,7 @@ namespace Game.Managers
     {
         [SerializeField] private Fellow firstFellow;
         [SerializeField] private PistolRig pistolRig;
+        [SerializeField] private SmgRig smgRig;
 
         private Stack<Fellow> collected = new Stack<Fellow>();
 
@@ -22,11 +23,26 @@ namespace Game.Managers
 
         public void AddNewFellow(Fellow newFellow)
         {
+            newFellow.Collider.enabled = false;
+
             collected.Push(newFellow);
 
-            pistolRig.AddFellowToRig(newFellow);
+            if (pistolRig.gameObject.activeSelf)
+            {
+                if (pistolRig.IsFull())
+                {
+                    pistolRig.Transfer(smgRig);
+                }
+                else
+                {
+                    pistolRig.AddFellowToRig(newFellow);
+                }
+            }
 
-            newFellow.Collider.enabled = false;
+            if (smgRig.gameObject.activeSelf)
+            {
+                smgRig.AddFellowToRig(newFellow);
+            }
         }
 
         public void RemoveFellow()

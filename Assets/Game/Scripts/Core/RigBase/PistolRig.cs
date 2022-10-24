@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Game.Core.RigBase
 {
     public class PistolRig : RigBase
@@ -10,6 +6,7 @@ namespace Game.Core.RigBase
         {
             base.AddFellowToRig(fellow);
             
+            // For the pistol rig only, we will rearrange after the second fellow.
             if (fellows.Count > 1)
             {
                 Rearrange();
