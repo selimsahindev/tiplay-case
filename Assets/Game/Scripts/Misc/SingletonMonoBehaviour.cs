@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Linq;
 using Object = UnityEngine.Object;
 
-namespace SelimSahin.Singletons
+namespace Game.Singletons
 {
 	public static class SingletonMonoBehaviour
 	{

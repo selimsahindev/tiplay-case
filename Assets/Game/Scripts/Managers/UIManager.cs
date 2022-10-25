@@ -12,6 +12,7 @@ namespace Game.Managers
     {
         public MainPanel mainPanel;
         public GamePanel gamePanel;
+        public CommonPanel commonPanel;
 
         private void Awake()
         {
@@ -22,6 +23,7 @@ namespace Game.Managers
         {
             mainPanel.SetActiveImmediately(true);
             gamePanel.SetActiveImmediately(false);
+            commonPanel.SetActiveImmediately(true);
         }
 
         private void HandleGameStartedEvent()

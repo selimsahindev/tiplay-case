@@ -1,6 +1,6 @@
 using UnityEngine;
 using Game.Core.Events;
-using SelimSahin.Singletons;
+using Game.Singletons;
 using EventType = Game.Core.Enums.EventType;
 
 namespace Game.Managers
