@@ -24,7 +24,7 @@ namespace Game.Managers
             gamePanel.SetActiveImmediately(false);
         }
 
-        private void HandleOnGameStart()
+        private void HandleGameStartedEvent()
         {
             mainPanel.SetActiveSmooth(false);
             gamePanel.SetActiveSmooth(true);
@@ -32,12 +32,12 @@ namespace Game.Managers
 
         private void OnEnable()
         {
-            EventBase.StartListening(EventType.OnGameStart, HandleOnGameStart);
+            EventBase.StartListening(EventType.GameStarted, HandleGameStartedEvent);
         }
 
         private void OnDisable()
         {
-            EventBase.StopListening(EventType.OnGameStart, HandleOnGameStart);
+            EventBase.StopListening(EventType.GameStarted, HandleGameStartedEvent);
         }
     }
 }

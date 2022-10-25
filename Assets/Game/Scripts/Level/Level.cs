@@ -8,19 +8,19 @@ namespace Game.Level
     {
         [SerializeField] private GameObject startCamera;
 
-        private void HandleOnGameStart()
+        private void HandleGameStartedEvent()
         {
             startCamera.SetActive(false);
         }
 
         private void OnEnable()
         {
-            EventBase.StartListening(EventType.OnGameStart, HandleOnGameStart);
+            EventBase.StartListening(EventType.GameStarted, HandleGameStartedEvent);
         }
 
         private void OnDisable()
         {
-            EventBase.StopListening(EventType.OnGameStart, HandleOnGameStart);
+            EventBase.StopListening(EventType.GameStarted, HandleGameStartedEvent);
         }
     }
 }

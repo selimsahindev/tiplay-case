@@ -1,11 +1,12 @@
 using UnityEngine;
 using Game.Core.Events;
+using SelimSahin.Singletons;
 using EventType = Game.Core.Enums.EventType;
 
 namespace Game.Managers
 {
     [DefaultExecutionOrder(-1)]
-    public class GameManager : MonoBehaviour, IProvidable
+    public class GameManager : SingletonMonoBehaviour<GameManager>, IProvidable
     {
         public bool IsGameActive
         {
@@ -15,6 +16,7 @@ namespace Game.Managers
 
         private void Awake()
         {
+            SetupInstance(false);
             IsGameActive = false;
             ServiceProvider.Register(this);
         }
@@ -22,13 +24,13 @@ namespace Game.Managers
         public void StartGame()
         {
             IsGameActive = true;
-            EventBase.NotifyListeners(EventType.OnGameStart);
+            EventBase.NotifyListeners(EventType.GameStarted);
         }
 
         public void EndGame(bool status)
         {
             IsGameActive = false;
-            EventBase.NotifyListeners(EventType.OnGameOver, status);
+            EventBase.NotifyListeners(EventType.GameOver, status);
         }
     }
 }

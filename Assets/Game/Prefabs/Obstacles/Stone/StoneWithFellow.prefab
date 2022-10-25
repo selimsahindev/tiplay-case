@@ -69,6 +69,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6ff505aadd2b5248888ff1bf7bb3ece, type: 3}
+--- !u!4 &1422317716885620151 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1393747466544227843, guid: f6ff505aadd2b5248888ff1bf7bb3ece,
+    type: 3}
+  m_PrefabInstance: {fileID: 66009739880719284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4987146891704187504 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5034853061247818180, guid: f6ff505aadd2b5248888ff1bf7bb3ece,
@@ -93,6 +99,16 @@ PrefabInstance:
       propertyPath: theFellowOnTop
       value: 
       objectReference: {fileID: 4987146891704187504}
+    - target: {fileID: 5260772483338239779, guid: 5f8e4026e90935e42a7c5d42a6227fd9,
+        type: 3}
+      propertyPath: itemsOnTop.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260772483338239779, guid: 5f8e4026e90935e42a7c5d42a6227fd9,
+        type: 3}
+      propertyPath: itemsOnTop.Array.data[0]
+      value: 
+      objectReference: {fileID: 1422317716885620151}
     - target: {fileID: 8598340983033792003, guid: 5f8e4026e90935e42a7c5d42a6227fd9,
         type: 3}
       propertyPath: m_RootOrder

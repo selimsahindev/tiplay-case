@@ -5,6 +5,7 @@ using Game.Core.Events;
 using Game.Core.Constants;
 using Game.Core.RigBase;
 using EventType = Game.Core.Enums.EventType;
+using DG.Tweening;
 
 namespace Game.Managers
 {
@@ -17,6 +18,7 @@ namespace Game.Managers
         public int FellowCount => collected.Count;
 
         private Stack<Fellow> collected = new Stack<Fellow>();
+
         private UIManager uiManager;
 
         private void Awake()
@@ -50,17 +52,38 @@ namespace Game.Managers
             }
         }
 
+        public void RemoveFellows(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                RemoveFellow();
+            }
+        }
+
         public void RemoveFellow()
         {
             if (collected.Count == 0)
             {
+                GameManager.Instance.EndGame(false);
                 return;
             }
 
-            collected.Pop();
+            Sequence seq = DOTween.Sequence();
+            Fellow fellow = collected.Pop();
+            float duration = 0.35f;
+            
+            fellow.transform.SetParent(null);
+            Vector3 movePos = transform.position + Random.onUnitSphere * Random.Range(1f, 2.5f);
+            seq.Append(fellow.transform.DOMove(movePos, duration));
+            seq.Join(fellow.transform.DORotate(Random.onUnitSphere * Random.Range(30f, 270f), duration));
+            seq.Join(fellow.transform.DOScale(0f, duration));
+            seq.OnComplete(() => fellow.gameObject.SetActive(false));
+
+            // Move progress indicator.
+            uiManager.gamePanel.progressUI.MoveArrow(FellowCount);
         }
-        
-        private void HandleOnGameStart()
+
+        private void HandleGameStartedEvent()
         {
             // Set the first character
             firstFellow.Animator.SetTrigger(AnimationHash.Run);
@@ -81,12 +104,12 @@ namespace Game.Managers
 
         private void OnEnable()
         {
-            EventBase.StartListening(EventType.OnGameStart, HandleOnGameStart);
+            EventBase.StartListening(EventType.GameStarted, HandleGameStartedEvent);
         }
 
         private void OnDisable()
         {
-            EventBase.StopListening(EventType.OnGameStart, HandleOnGameStart);
+            EventBase.StopListening(EventType.GameStarted, HandleGameStartedEvent);
         }
     }
 }

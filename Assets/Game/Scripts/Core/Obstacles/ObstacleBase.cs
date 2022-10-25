@@ -6,6 +6,8 @@ namespace Game.Core.Obstacles
 {
     public class ObstacleBase : MonoBehaviour
     {
+        [SerializeField] protected int damage = 3;
+
         protected Collider col;
 
         protected virtual void Awake()

@@ -43,20 +43,28 @@ namespace Game.Core
             transform.localPosition = pos;
         }
 
-        private void HandleOnGameStart()
+        private void HandleGameStartedEvent()
         {
             isMoving = true;
             follower.followSpeed = forwardSpeed;
         }
 
+        private void HandleGameOverEvent(bool status)
+        {
+            isMoving = false;
+            follower.followSpeed = 0f;
+        }
+
         private void OnEnable()
         {
-            EventBase.StartListening(EventType.OnGameStart, HandleOnGameStart);
+            EventBase.StartListening(EventType.GameStarted, HandleGameStartedEvent);
+            EventBase.StartListening(EventType.GameOver, HandleGameOverEvent);
         }
 
         private void OnDisable()
         {
-            EventBase.StopListening(EventType.OnGameStart, HandleOnGameStart);
+            EventBase.StopListening(EventType.GameStarted, HandleGameStartedEvent);
+            EventBase.StopListening(EventType.GameOver, HandleGameOverEvent);
         }
     }
 }

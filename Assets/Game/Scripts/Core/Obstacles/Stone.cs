@@ -8,7 +8,7 @@ namespace Game.Core.Obstacles
     public class Stone : Destructible
     {
         [SerializeField] private HealthIndicatorUI healthIndicator;
-        [SerializeField] private Fellow theFellowOnTop;
+        [SerializeField] private Transform[] itemsOnTop;
 
         protected override void Awake()
         {
@@ -25,22 +25,24 @@ namespace Game.Core.Obstacles
 
         protected override void BreakApart()
         {
-            if (theFellowOnTop != null)
+            if (itemsOnTop != null)
             {
-                ThrowTheFellowDown();
+                ThrowTheItemsDown();
             }
 
             base.BreakApart();
         }
 
-        private void ThrowTheFellowDown()
+        private void ThrowTheItemsDown()
         {
-            Debug.Log("fellow is threw");
-            theFellowOnTop.transform.SetParent(null);
+            foreach (Transform item in itemsOnTop)
+            {
+                item.SetParent(null);
 
-            Vector3 jumpPos = transform.position.Modify(y: 0f) + Vector3.forward * 3f;
+                Vector3 jumpPos = transform.position.Modify(y: 0f) + Vector3.forward * 4f;
 
-            theFellowOnTop.transform.DOJump(jumpPos, 1f, 1, 0.15f).SetEase(Ease.InOutSine);
+                item.DOJump(jumpPos, 0.8f, 1, 0.25f).SetEase(Ease.InOutSine);
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -49,8 +51,14 @@ namespace Game.Core.Obstacles
 
             if (rigManager != null)
             {
+                rigManager.RemoveFellows(damage);
                 Disappear();
             }
+        }
+
+        private void OnValidate()
+        {
+            healthIndicator?.SetHealth(health);
         }
     }
 }
