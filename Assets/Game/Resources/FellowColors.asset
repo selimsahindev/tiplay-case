@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba0830aef103084aa7ac64e38aacfad, type: 3}
   m_Name: FellowColors
   m_EditorClassIdentifier: 
-  BlackColor: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 1}
-  BlueColor: {r: 0, g: 0.6117647, b: 0.9803922, a: 1}
-  OrangeColor: {r: 0.98823535, g: 0.7254902, b: 0.121568635, a: 1}
+  BlackColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
+  BlueColor: {r: 0.32156864, g: 0.5176471, b: 0.89019614, a: 1}
+  OrangeColor: {r: 0.8679245, g: 0.556947, b: 0.16785331, a: 1}
   YellowColor: {r: 0.9467423, g: 1, b: 0.0990566, a: 1}
-  RedColor: {r: 1, g: 0, b: 0, a: 1}
+  RedColor: {r: 0.8867924, g: 0.18823427, b: 0.23008943, a: 1}

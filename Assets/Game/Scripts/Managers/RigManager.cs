@@ -48,9 +48,6 @@ namespace Game.Managers
             {
                 smgRig.AddFellowToRig(newFellow);
             }
-
-            // Move progress indicator.
-            uiManager.gamePanel.progressUI.MoveArrow(FellowCount);
         }
 
         public void RemoveFellow()
@@ -76,6 +73,9 @@ namespace Game.Managers
             if (fellow != null)
             {
                 AddNewFellow(fellow);
+
+                // Move progress indicator.
+                uiManager.gamePanel.progressUI.MoveArrow(FellowCount);
             }
         }
 

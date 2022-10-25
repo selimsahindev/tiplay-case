@@ -22,15 +22,5 @@ namespace Game.Managers
             RegisterDictionary.Add(typeof(T), target);
             return target;
         }
-
-        public static InputManager GetInputManager
-        {
-            get { return GetManager<InputManager>(); }
-        }
-
-        public static UIManager GetUIManager
-        {
-            get { return GetManager<UIManager>(); }
-        }
     }
 }
