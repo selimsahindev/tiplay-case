@@ -11,11 +11,13 @@ namespace Game.Managers
         [SerializeField] private Fellow fellowPrefab;
         private ParticleSystem moneySplashParticle;
         private ParticleSystem explosionParticle;
+        private GameObject bulletPrefab;
 
         private Dictionary<ParticleNames, ObjectPool<ParticleSystem>> poolsDictionary
             = new Dictionary<ParticleNames, ObjectPool<ParticleSystem>>();
 
         private ObjectPool<Fellow> fellowPool;
+        private ObjectPool<GameObject> bulletPool;
 
         private void Awake()
         {
@@ -29,6 +31,7 @@ namespace Game.Managers
         {
             moneySplashParticle = Resources.Load<ParticleSystem>("Particles/MoneySplashParticle");
             explosionParticle = Resources.Load<ParticleSystem>("Particles/ExplosionParticle");
+            bulletPrefab = Resources.Load<GameObject>("Bullet");
         }
 
         private void PopulatePools()
@@ -71,6 +74,17 @@ namespace Game.Managers
                     item.gameObject.SetActive(false);
                 }
             );
+
+            parent = new GameObject("Bullets").transform;
+            parent.SetParent(this.transform);
+            bulletPool = new ObjectPool<GameObject>(
+                32,
+                () => Instantiate(bulletPrefab, Vector3.zero, Quaternion.identity, parent),
+                item => {
+                    item.transform.SetParent(parent);
+                    item.gameObject.SetActive(false);
+                }
+            );
         }
 
         public ObjectPool<ParticleSystem> GetParticlePool(ParticleNames particleName)
@@ -88,6 +102,11 @@ namespace Game.Managers
         public ObjectPool<Fellow> GetFellowPool
         {
             get { return fellowPool; }
+        }
+
+        public ObjectPool<GameObject> GetBulletPool
+        {
+            get { return bulletPool; }
         }
     }
 }

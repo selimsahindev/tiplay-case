@@ -187,7 +187,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 6
-  timeBetweenShots: 0.15
+  bulletSize: 0.12
+  bulletAmount: 1
+  bulletSeperation: 0.08
+  timeBetweenShots: 0.1
   tipOfTheGun: {fileID: 4012446771463588729}
   layerMask:
     serializedVersion: 2

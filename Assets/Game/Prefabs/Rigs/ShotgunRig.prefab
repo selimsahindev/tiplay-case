@@ -295,6 +295,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 6
+  bulletSize: 0.15
+  bulletAmount: 5
+  bulletSeperation: 0.15
   timeBetweenShots: 0.4
   tipOfTheGun: {fileID: 4012446771463588729}
   layerMask:

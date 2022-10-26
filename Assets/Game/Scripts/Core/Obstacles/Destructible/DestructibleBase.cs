@@ -1,3 +1,6 @@
+using DG.Tweening;
+using UnityEngine;
+
 namespace Game.Core.Obstacles
 {
     public class DestructibleBase : ObstacleBase
@@ -13,6 +16,9 @@ namespace Game.Core.Obstacles
                 health = 0;
                 BreakApart();
             }
+
+            transform.DOKill(true);
+            transform.DOScale(transform.localScale * 1.12f, 0.08f).SetLoops(2, LoopType.Yoyo);
         }
 
         public void Disappear()

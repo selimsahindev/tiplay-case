@@ -37,11 +37,20 @@ namespace Game.Core.Obstacles
         {
             foreach (Transform item in itemsOnTop)
             {
+                Vector3 jumpPos;
+
                 item.SetParent(null);
+                
+                if (item.GetComponent<Dollar>() != null)
+                {
+                    jumpPos = item.localPosition.Modify(y: 0f) + Vector3.back * 1f;
+                }
+                else
+                {
+                    jumpPos = item.localPosition.Modify(y: 0f) + Vector3.forward * 4f;
+                }
 
-                Vector3 jumpPos = transform.position.Modify(y: 0f) + Vector3.forward * 4f;
-
-                item.DOJump(jumpPos, 0.8f, 1, 0.25f).SetEase(Ease.InOutSine);
+                item.DOLocalJump(jumpPos, 0.8f, 1, 0.25f).SetEase(Ease.InOutSine);
             }
         }
 
