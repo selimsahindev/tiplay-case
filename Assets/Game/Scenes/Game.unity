@@ -5142,6 +5142,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2125306404}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &425445352215818404
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1635063559258458256, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635063559258458256, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635063559258458256, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635063559258458256, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635063559258458256, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.00000041723246
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635063559258458256, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635063559258458256, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635063559258458256, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635063559258458256, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635063559258458256, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635063559258458256, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635063559258458257, guid: 1a279d7babdbd7f438dd7cb428134815,
+        type: 3}
+      propertyPath: m_Name
+      value: GiantHuman
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a279d7babdbd7f438dd7cb428134815, type: 3}
 --- !u!1001 &942764591211863529
 PrefabInstance:
   m_ObjectHideFlags: 0
