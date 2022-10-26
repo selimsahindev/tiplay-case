@@ -13,7 +13,7 @@ namespace Game.Core
         [SerializeField] private float sideBounds;
 
         private bool isMoving = false;
-        private InputManager inputManager;
+        private InputListener inputListener;
         private SplineFollower follower;
 
         private void Awake()
@@ -21,7 +21,7 @@ namespace Game.Core
             follower = GetComponentInParent<SplineFollower>();
             follower.followSpeed = 0f;
 
-            inputManager = ServiceProvider.GetManager<InputManager>();
+            inputListener = ServiceProvider.GetManager<InputListener>();
         }
 
         private void Update()
@@ -36,8 +36,7 @@ namespace Game.Core
         {
             Vector3 pos = transform.localPosition;
 
-            pos.x += inputManager.Input.x * sideSpeed * Time.deltaTime;
-
+            pos.x += inputListener.Input.x * sideSpeed * Time.deltaTime;
             pos.x = Mathf.Clamp(pos.x, -sideBounds, sideBounds);
 
             transform.localPosition = pos;

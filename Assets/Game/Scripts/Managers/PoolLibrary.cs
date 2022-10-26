@@ -1,3 +1,4 @@
+using Game.Core;
 using Game.Core.Enums;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,16 @@ using UnityEngine;
 namespace Game.Managers
 {
     [DefaultExecutionOrder(-1)]
-    public class ParticleLibrary : MonoBehaviour, IProvidable
+    public class PoolLibrary : MonoBehaviour, IProvidable
     {
+        [SerializeField] private Fellow fellowPrefab;
+        private ParticleSystem moneySplashParticle;
+        private ParticleSystem explosionParticle;
+
         private Dictionary<ParticleNames, ObjectPool<ParticleSystem>> poolsDictionary
             = new Dictionary<ParticleNames, ObjectPool<ParticleSystem>>();
 
-        private ParticleSystem moneySplashParticle;
-        private ParticleSystem explosionParticle;
+        private ObjectPool<Fellow> fellowPool;
 
         private void Awake()
         {
@@ -33,7 +37,6 @@ namespace Game.Managers
             
             parent = new GameObject("MoneySplashParticles").transform;
             parent.SetParent(this.transform);
-
             poolsDictionary.Add(ParticleNames.MoneySplash, new ObjectPool<ParticleSystem>(
                 12,
                 () => {
@@ -47,7 +50,6 @@ namespace Game.Managers
 
             parent = new GameObject("ExplosionParticles").transform;
             parent.SetParent(this.transform);
-
             poolsDictionary.Add(ParticleNames.Explosion, new ObjectPool<ParticleSystem>(
                 12,
                 () => {
@@ -58,6 +60,17 @@ namespace Game.Managers
                     item.gameObject.SetActive(false);
                 }
             ));
+
+            parent = new GameObject("Fellows").transform;
+            parent.SetParent(this.transform);
+            fellowPool = new ObjectPool<Fellow>(
+                128,
+                () => Instantiate(fellowPrefab, Vector3.zero, Quaternion.identity, parent),
+                item => {
+                    item.transform.SetParent(parent);
+                    item.gameObject.SetActive(false);
+                }
+            );
         }
 
         public ObjectPool<ParticleSystem> GetParticlePool(ParticleNames particleName)
@@ -70,6 +83,11 @@ namespace Game.Managers
             {
                 return null;
             }
+        }
+
+        public ObjectPool<Fellow> GetFellowPool
+        {
+            get { return fellowPool; }
         }
     }
 }

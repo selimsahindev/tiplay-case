@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using Game.Scriptables;
 using Game.Core.Enums;
+using Game.Managers;
 
 namespace Game.Core.RigBase
 {

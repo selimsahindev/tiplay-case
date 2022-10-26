@@ -58,6 +58,25 @@ namespace Game.UI
             nodesParent.DOAnchorPosX(baseAnchoredPosition.x - nodeIndex * elementSize.x, 0.15f).SetEase(Ease.InOutSine);
 
             currentIndex = nodeIndex;
+
+            SetText(nodeIndex);
+        }
+
+        // This could be dynamic but due to time concerns I update the text here statically.
+        private void SetText(int index)
+        {
+            if (index < 5)
+            {
+                weaponNameText.text = "PISTOL";
+            }
+            else if (index < 9)
+            {
+                weaponNameText.text = "SMG";
+            }
+            else
+            {
+                weaponNameText.text = "SHOTGUN";
+            }
         }
     }
 }

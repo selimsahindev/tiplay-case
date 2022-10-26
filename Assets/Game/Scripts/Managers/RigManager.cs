@@ -33,9 +33,9 @@ namespace Game.Managers
 
         public void AddNewFellow(Fellow newFellow)
         {
-            newFellow.Collider.enabled = false;
+            bool isExtra = false;
 
-            collected.Push(newFellow);
+            newFellow.Collider.enabled = false;
 
             if (pistolRig.gameObject.activeSelf)
             {
@@ -51,7 +51,21 @@ namespace Game.Managers
 
             if (smgRig.gameObject.activeSelf)
             {
-                smgRig.AddFellowToRig(newFellow);
+                if (smgRig.IsFull())
+                { 
+                    // ADD +1 MONEY FOR EXTRA FELLOW
+                    newFellow.gameObject.SetActive(false);
+                    isExtra = true;
+                }
+                else
+                {
+                    smgRig.AddFellowToRig(newFellow);
+                }
+            }
+
+            if (!isExtra)
+            {
+                collected.Push(newFellow);
             }
         }
 

@@ -30,7 +30,7 @@ namespace Game.Core
         private void PlayMoneySplash()
         {
             //ParticleSystem particle = Instantiate(moneySplashParticle, transform.position, Quaternion.identity, null);
-            ParticleLibrary particleLib = ServiceProvider.GetManager<ParticleLibrary>();
+            PoolLibrary particleLib = ServiceProvider.GetManager<PoolLibrary>();
             ParticleSystem particle = particleLib.GetParticlePool(ParticleNames.MoneySplash).Pop();
             particle.gameObject.SetActive(true);
             particle.transform.position = transform.position + Vector3.up * 0.15f;

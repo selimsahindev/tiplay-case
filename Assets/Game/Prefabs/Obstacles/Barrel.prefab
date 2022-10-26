@@ -84,6 +84,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  healthIndicator: {fileID: 7202081025647405581}
 --- !u!1001 &7270801218318280079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,6 +215,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7270801218318280079}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7202081025647405581 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 510593027872247682, guid: fcb71ab32faec444aa59ab5f0930b0e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7270801218318280079}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc61ded05e4421a45bbc2b20d68c2f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7876657835725168771
 PrefabInstance:
   m_ObjectHideFlags: 0

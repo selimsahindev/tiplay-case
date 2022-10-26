@@ -1,4 +1,5 @@
 using Game.Managers;
+using Game.UI;
 using UnityEngine;
 
 namespace Game.Core.Obstacles
@@ -7,14 +8,21 @@ namespace Game.Core.Obstacles
     {
         [SerializeField] private float radius;
         [SerializeField] private LayerMask layerMask;
+        [SerializeField] private HealthIndicatorUI healthIndicator;
 
-        private ParticleLibrary particleLibrary;
+        private PoolLibrary particleLibrary;
 
         protected override void Awake()
         {
             base.Awake();
+            healthIndicator.SetHealth(health);
+            particleLibrary = ServiceProvider.GetManager<PoolLibrary>();
+        }
 
-            particleLibrary = ServiceProvider.GetManager<ParticleLibrary>();
+        public override void GetDamage(int damage)
+        {
+            base.GetDamage(damage);
+            healthIndicator.SetHealth(health);
         }
 
         public override void BreakApart()
@@ -56,6 +64,11 @@ namespace Game.Core.Obstacles
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(transform.position, radius);
+        }
+
+        private void OnValidate()
+        {
+            healthIndicator?.SetHealth(health);
         }
     }
 }

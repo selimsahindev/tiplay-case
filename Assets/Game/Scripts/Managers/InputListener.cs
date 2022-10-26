@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 namespace Game.Managers
 {
     [DefaultExecutionOrder(-1)]
-    public class InputManager : MonoBehaviour, IProvidable, IPointerDownHandler, IPointerUpHandler
+    public class InputListener : MonoBehaviour, IProvidable, IPointerDownHandler, IPointerUpHandler
     {
         // Change this according to the desired precision.
         [SerializeField] private float maxDistance = 100f;
