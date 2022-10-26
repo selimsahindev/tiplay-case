@@ -17,8 +17,11 @@ namespace Game.Managers
         private void Awake()
         {
             SetupInstance(false);
-            IsGameActive = false;
+            Application.targetFrameRate = 60;
             ServiceProvider.Register(this);
+
+            IsGameActive = false;
+            DG.Tweening.DOTween.SetTweensCapacity(200, 100);
         }
 
         public void StartGame()

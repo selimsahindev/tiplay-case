@@ -12,6 +12,7 @@ namespace Game.Scriptables
         public Color OrangeColor;
         public Color YellowColor;
         public Color RedColor;
+        public Color GreyColor;
 
         public Color GetColor(FellowColorType colorType)
         {
@@ -21,6 +22,7 @@ namespace Game.Scriptables
                 case FellowColorType.Orange: return OrangeColor;
                 case FellowColorType.Yellow: return YellowColor;
                 case FellowColorType.Red: return RedColor;
+                case FellowColorType.Grey: return GreyColor;
                 default: return BlackColor;
             }
         }

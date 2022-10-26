@@ -14,6 +14,7 @@ namespace Game.Managers
         [SerializeField] private Fellow firstFellow;
         [SerializeField] private PistolRig pistolRig;
         [SerializeField] private SmgRig smgRig;
+        [SerializeField] private ShotgunRig shotgunRig;
 
         public int FellowCount => collected.Count;
 
@@ -41,7 +42,7 @@ namespace Game.Managers
             {
                 if (pistolRig.IsFull())
                 {
-                    pistolRig.Transfer(smgRig);
+                    pistolRig.TransferTo(smgRig);
                 }
                 else
                 {
@@ -52,14 +53,26 @@ namespace Game.Managers
             if (smgRig.gameObject.activeSelf)
             {
                 if (smgRig.IsFull())
-                { 
+                {
+                    smgRig.TransferTo(shotgunRig);
+                }
+                else
+                {
+                    smgRig.AddFellowToRig(newFellow);
+                }
+            }
+
+            if (shotgunRig.gameObject.activeSelf)
+            {
+                if (shotgunRig.IsFull())
+                {
                     // ADD +1 MONEY FOR EXTRA FELLOW
                     newFellow.gameObject.SetActive(false);
                     isExtra = true;
                 }
                 else
                 {
-                    smgRig.AddFellowToRig(newFellow);
+                    shotgunRig.AddFellowToRig(newFellow);
                 }
             }
 

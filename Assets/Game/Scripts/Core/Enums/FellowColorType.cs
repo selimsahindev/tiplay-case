@@ -6,6 +6,7 @@ namespace Game.Core.Enums
         Blue,
         Orange,
         Yellow,
-        Red
+        Red,
+        Grey
     }
 }

@@ -36,6 +36,7 @@ namespace Game.Core
                 {
                     for (int i = 0; i < value; i++)
                     {
+                        Debug.Log("added");
                         Fellow fellow = poolLib.GetFellowPool.Pop();
                         fellow.gameObject.SetActive(true);
                         fellow.transform.position = rigManager.transform.position;

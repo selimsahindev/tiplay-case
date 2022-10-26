@@ -178,19 +178,19 @@ MonoBehaviour:
   fellowPlaces:
   - isUsed: 0
     position: {fileID: 3664327251027932517}
-    poseName: Pose3
+    pose: 2
     color: 0
   - isUsed: 0
     position: {fileID: 4501320823916104518}
-    poseName: Pose1
+    pose: 0
     color: 0
   - isUsed: 0
     position: {fileID: 1175914500852860405}
-    poseName: Pose1
+    pose: 0
     color: 4
   - isUsed: 0
     position: {fileID: 2378086998901114163}
-    poseName: Pose5
+    pose: 4
     color: 4
   fellows: []
 --- !u!114 &8064446310580474969
@@ -208,10 +208,10 @@ MonoBehaviour:
   range: 5
   timeBetweenShots: 0.2
   tipOfTheGun: {fileID: 5974976210961300727}
-  rig: {fileID: 2779464841504175551}
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  isActive: 0
 --- !u!1 &4351846981405788938
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using Game.Scriptables;
 using Game.Core.Enums;
-using Game.Managers;
+using Game.Core.Constants;
 
 namespace Game.Core.RigBase
 {
@@ -12,7 +12,7 @@ namespace Game.Core.RigBase
     {
         [HideInInspector] public bool isUsed = false;
         public Transform position;
-        public string poseName;
+        public PoseType pose;
         public FellowColorType color;
     }
 
@@ -22,6 +22,7 @@ namespace Game.Core.RigBase
         public List<Fellow> fellows = new List<Fellow>();
 
         protected FellowColors_SO colors;
+        protected List<Sequence> runningSequences = new List<Sequence>();
         
         public ShootHandler ShootHandler
         {
@@ -50,7 +51,7 @@ namespace Game.Core.RigBase
             this.fellows.AddRange(fellows);
         }
 
-        public void Transfer(RigBase newRig)
+        public void TransferTo(RigBase newRig)
         {
             newRig.gameObject.SetActive(true);
             newRig.AddFellowsToRig(fellows);
@@ -61,15 +62,17 @@ namespace Game.Core.RigBase
 
         protected void Rearrange()
         {
-            foreach (FellowPlacementData place in fellowPlaces)
+            foreach (Sequence seq in runningSequences)
             {
-                place.isUsed = false;
+                seq.Kill();
             }
+            runningSequences.Clear();
 
-            for (int i = 0; i < fellows.Count; i++)
+            for (int i = 0; i < fellowPlaces.Count; i++)
             {
-                if (i >= fellowPlaces.Count)
+                if (i >= fellows.Count)
                 {
+                    fellowPlaces[i].isUsed = false;
                     return;
                 }
 
@@ -82,9 +85,10 @@ namespace Game.Core.RigBase
                 seq.Append(fellows[i].transform.DOLocalMove(Vector3.zero, 0.25f));
                 seq.Join(fellows[i].transform.DOLocalRotate(Vector3.zero, 0.25f));
                 seq.Play();
+                runningSequences.Add(seq);
 
                 fellows[i].SkinnedMeshRenderer.material.color = colors.GetColor(fellowPlaces[i].color);
-                fellows[i].Animator.SetTrigger(fellowPlaces[i].poseName);
+                fellows[i].Animator.SetTrigger(AnimationHash.TryGetPoseHash(fellowPlaces[i].pose));
             }
         }
     }
