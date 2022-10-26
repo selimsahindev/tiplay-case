@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class ExtensionMethods
@@ -13,5 +14,13 @@ public static class ExtensionMethods
             (x == null ? original.x : (float)x),
             (y == null ? original.y : (float)y),
             (z == null ? original.z : (float)z));
+    }
+
+    public static void RemoveAtFast<T>(this List<T> list, int index)
+    {
+        int lastElementIndex = list.Count - 1;
+
+        list[index] = list[lastElementIndex];
+        list.RemoveAt(lastElementIndex);
     }
 }

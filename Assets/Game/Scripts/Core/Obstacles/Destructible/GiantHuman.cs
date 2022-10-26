@@ -6,11 +6,12 @@ using UnityEngine;
 
 namespace Game.Core.Obstacles
 {
-    public class GiantHuman : Destructible
+    public class GiantHuman : DestructibleBase
     {
         [SerializeField] private float runSpeed;
         [SerializeField] private Animator animator;
         [SerializeField] private HealthIndicatorUI healthIndicator;
+        [SerializeField] private Transform stickman;
 
         private bool isHit = false;
         private bool isRunning = false;
@@ -53,7 +54,7 @@ namespace Game.Core.Obstacles
 
             Sequence seq = DOTween.Sequence();
 
-            seq.Append(transform.DORotate(Vector3.zero, 0.2f));
+            seq.Append(stickman.DORotate(Vector3.zero, 0.2f));
             seq.OnComplete(() => isRunning = true);
 
             animator.SetTrigger(AnimationHash.Run);

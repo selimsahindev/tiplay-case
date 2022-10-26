@@ -6,6 +6,11 @@ namespace Game.Core.RigBase
         {
             base.AddFellowToRig(fellow);
             Rearrange();
+
+            if (fellows.Count > 0)
+            {
+                ShootHandler.isActive = true;
+            }
         }
     }
 }

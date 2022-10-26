@@ -4,8 +4,8 @@ using Game.Core;
 using Game.Core.Events;
 using Game.Core.Constants;
 using Game.Core.RigBase;
-using EventType = Game.Core.Enums.EventType;
 using DG.Tweening;
+using EventType = Game.Core.Enums.EventType;
 
 namespace Game.Managers
 {
@@ -24,7 +24,10 @@ namespace Game.Managers
         private void Awake()
         {
             uiManager = ServiceProvider.GetManager<UIManager>();
+        }
 
+        private void Start()
+        {
             AddNewFellow(firstFellow);
         }
 

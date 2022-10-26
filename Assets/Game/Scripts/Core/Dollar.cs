@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using Game.Core.Events;
+using Game.Core.Enums;
 using Game.Managers;
 using EventType = Game.Core.Enums.EventType;
 
@@ -9,7 +10,6 @@ namespace Game.Core
     public class Dollar : MonoBehaviour
     {
         public int value = 20;
-        public ParticleSystem moneySplashParticle;
         private Collider col;
 
         private void Awake()
@@ -29,10 +29,16 @@ namespace Game.Core
 
         private void PlayMoneySplash()
         {
-            ParticleSystem particle = Instantiate(moneySplashParticle, transform.position, Quaternion.identity, null);
-            particle.transform.position += Vector3.up * 0.15f;
+            //ParticleSystem particle = Instantiate(moneySplashParticle, transform.position, Quaternion.identity, null);
+            ParticleLibrary particleLib = ServiceProvider.GetManager<ParticleLibrary>();
+            ParticleSystem particle = particleLib.GetParticlePool(ParticleNames.MoneySplash).Pop();
+            particle.gameObject.SetActive(true);
+            particle.transform.position = transform.position + Vector3.up * 0.15f;
             particle.transform.localScale = Vector3.one * 0.25f;
             particle.Play();
+            DelayHandler.WaitAndInvoke(() => {
+                particleLib.GetParticlePool(ParticleNames.MoneySplash).Push(particle);
+            }, particle.main.duration);
         }
 
         private void OnTriggerEnter(Collider other)

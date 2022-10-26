@@ -21,28 +21,22 @@ namespace Game.Core.RigBase
         public List<Fellow> fellows = new List<Fellow>();
 
         protected FellowColors_SO colors;
+        
+        public ShootHandler ShootHandler
+        {
+            get;
+            private set;
+        }
 
         private void Awake()
         {
             colors = Resources.Load<FellowColors_SO>("FellowColors");
+            ShootHandler = GetComponent<ShootHandler>();
         }
 
         public bool IsFull()
         {
             return fellows.Count >= fellowPlaces.Count;
-        }
-
-        private FellowPlacementData GetEmptyPlacementData()
-        {
-            foreach (FellowPlacementData place in fellowPlaces)
-            {
-                if (!place.isUsed)
-                {
-                    return place;
-                }
-            }
-
-            return null;
         }
 
         public virtual void AddFellowToRig(Fellow fellow)

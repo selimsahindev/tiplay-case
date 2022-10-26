@@ -9,6 +9,7 @@ namespace Game.Core.RigBase
             // For the pistol rig only, we will rearrange after the second fellow.
             if (fellows.Count > 1)
             {
+                ShootHandler.isActive = true;
                 Rearrange();
             }
         }

@@ -10,35 +10,40 @@ namespace Game.Core.RigBase
         [SerializeField] private float range;
         [SerializeField] private float timeBetweenShots;
         [Space, SerializeField] private Transform tipOfTheGun;
-        [SerializeField] private RigBase rig;
         [SerializeField] private LayerMask layerMask;
 
+        [HideInInspector] public bool isActive = false;
+
         private bool isLoaded = true;
+        private RigBase rig;
         private Transform target;
         private GameManager gameManager;
 
         private void Awake()
         {
             gameManager = ServiceProvider.GetManager<GameManager>();
+            rig = GetComponent<RigBase>();
         }
 
         private void Update()
         {
-            if (gameManager.IsGameActive)
+            if (isActive && gameManager.IsGameActive)
             {
                 RaycastUpdate();
-                HandleRotation();
+                //HandleRotation();
             }
         }
 
         private int GetPower()
         {
-            return rig.fellows.Count;
+            // TODO: Calculate this dynamically later.
+            return Mathf.Clamp(rig.fellows.Count, 1, 3);
         }
 
-        private void Fire(Destructible destructable)
+        private void Fire(DestructibleBase destructable)
         {
             destructable.GetDamage(GetPower());
+            Debug.Log("Shot is fired");
         }
 
         private void RaycastUpdate()
@@ -48,7 +53,7 @@ namespace Game.Core.RigBase
 
             if (Physics.Raycast(rayOrigin, Vector3.forward, out RaycastHit hit, range, layerMask))
             {
-                Destructible destructable = hit.collider.GetComponent<Destructible>();
+                DestructibleBase destructable = hit.collider.GetComponent<DestructibleBase>();
 
                 if (destructable != null)
                 {

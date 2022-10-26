@@ -1,6 +1,6 @@
 namespace Game.Core.Obstacles
 {
-    public class Destructible : ObstacleBase
+    public class DestructibleBase : ObstacleBase
     {
         public int health;
 
@@ -20,7 +20,7 @@ namespace Game.Core.Obstacles
             gameObject.SetActive(false);
         }
 
-        protected virtual void BreakApart()
+        public virtual void BreakApart()
         {
             // Handle Particles Etc.
             Disappear();

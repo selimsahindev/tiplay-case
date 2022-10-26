@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace Game.Core.Obstacles
 {
-    public class Stone : Destructible
+    public class Stone : DestructibleBase
     {
         [SerializeField] private HealthIndicatorUI healthIndicator;
         [SerializeField] private Transform[] itemsOnTop;
@@ -23,7 +23,7 @@ namespace Game.Core.Obstacles
             healthIndicator.SetHealth(health);
         }
 
-        protected override void BreakApart()
+        public override void BreakApart()
         {
             if (itemsOnTop != null)
             {
