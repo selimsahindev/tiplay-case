@@ -1,3 +1,4 @@
+using Game.Core.Events;
 using Game.Core.Obstacles;
 using Game.Managers;
 using System.Collections;
@@ -43,7 +44,10 @@ namespace Game.Core.RigBase
         private void Fire(DestructibleBase destructable)
         {
             destructable.GetDamage(GetPower());
-            Debug.Log("Shot is fired");
+            rig.PlayShootingAnimation();
+
+            // Notify listeners (Camera will shake upon this.)
+            EventBase.NotifyListeners(Enums.EventType.ShotsFired);
         }
 
         private void RaycastUpdate()

@@ -36,6 +36,12 @@ namespace Game.Core.RigBase
             ShootHandler = GetComponent<ShootHandler>();
         }
 
+        public virtual void PlayShootingAnimation()
+        {
+            // This'll be overridden by child classes.
+            return;
+        }
+
         public bool IsFull()
         {
             return fellows.Count >= fellowPlaces.Count;

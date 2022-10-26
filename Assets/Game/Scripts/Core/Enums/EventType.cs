@@ -4,6 +4,7 @@ namespace Game.Core.Enums
     {
         GameStarted,
         GameOver,
-        MoneyUpdated
+        MoneyUpdated,
+        ShotsFired
     }
 }
