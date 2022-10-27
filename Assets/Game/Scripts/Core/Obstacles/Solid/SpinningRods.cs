@@ -6,7 +6,6 @@ namespace Game.Core.Obstacles
 {
     public class SpinningRods : ObstacleBase
     {
-        [SerializeField] private Transform spinningPart;
         [SerializeField] private Trigger trigger;
         private Collider[] cols;
 
@@ -17,13 +16,11 @@ namespace Game.Core.Obstacles
             cols = trigger.GetComponents<Collider>();
             
             trigger.onTriggerEnter.AddListener(OnTriggerEnter);
-
-            spinningPart.DOLocalRotate(Vector3.up * -360f, 4.2f, RotateMode.LocalAxisAdd).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            RigManager rigManager = other.GetComponent<RigManager>();
+            RigManager rigManager = other.GetComponentInParent<RigManager>();
 
             if (rigManager != null)
             {

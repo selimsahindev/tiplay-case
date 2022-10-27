@@ -3,7 +3,7 @@ using Game.Managers;
 
 namespace Game.Core.Obstacles
 {
-    public class Fence : ObstacleBase
+    public class Carousel : ObstacleBase
     {
         private void OnTriggerEnter(Collider other)
         {

@@ -7,7 +7,7 @@ namespace Game.Core.Obstacles
     {
         private void OnTriggerEnter(Collider other)
         {
-            RigManager rigManager = other.GetComponent<RigManager>();
+            RigManager rigManager = other.GetComponentInParent<RigManager>();
 
             if (rigManager != null)
             {
