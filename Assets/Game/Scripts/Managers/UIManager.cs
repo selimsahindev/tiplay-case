@@ -37,7 +37,6 @@ namespace Game.Managers
         private void HandleGameOverEvent(bool status)
         {
             gamePanel.SetActiveSmooth(false);
-            commonPanel.SetActiveSmooth(false);
             endPanel.SetActiveSmooth(true);
 
             if (status)
@@ -46,6 +45,7 @@ namespace Game.Managers
             }
             else
             {
+                commonPanel.SetActiveSmooth(false);
                 endPanel.EnableFailScreen();
             }
         }

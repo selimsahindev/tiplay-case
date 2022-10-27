@@ -27,7 +27,6 @@ namespace Game.UI
             }
             else if (money >= 1000)
             {
-                float fMoney = money / 1000;
                 moneyString = "$" + ((float)money / 1000).ToString("0.0") + "k";
             }
             else
@@ -38,7 +37,7 @@ namespace Game.UI
             text.text = moneyString;
         }
 
-        private void HandleMoneyUpdatedEvent()
+        private void HandleMoneyAddedEvent()
         {
             transform.DOKill(true);
             transform.DOScale(Vector3.one * 1.1f, 0.2f).SetLoops(2, LoopType.Yoyo);
@@ -46,14 +45,21 @@ namespace Game.UI
             SetMoney(DataManager.Instance.Money);
         }
 
+        private void HandleMoneyDecreasedEvent()
+        {
+            SetMoney(DataManager.Instance.Money);
+        }
+
         private void OnEnable()
         {
-            EventBase.StartListening(EventType.MoneyUpdated, HandleMoneyUpdatedEvent);
+            EventBase.StartListening(EventType.MoneyAdded, HandleMoneyAddedEvent);
+            EventBase.StartListening(EventType.MoneyDecreased, HandleMoneyDecreasedEvent);
         }
 
         private void OnDisable()
         {
-            EventBase.StopListening(EventType.MoneyUpdated, HandleMoneyUpdatedEvent);
+            EventBase.StopListening(EventType.MoneyAdded, HandleMoneyAddedEvent);
+            EventBase.StopListening(EventType.MoneyDecreased, HandleMoneyDecreasedEvent);
         }
     }
 }

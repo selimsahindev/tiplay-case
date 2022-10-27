@@ -29,7 +29,6 @@ namespace Game.Core.Obstacles
 
         public virtual void BreakApart()
         {
-            // Handle Particles Etc.
             Disappear();
 
             MMVibrationManager.Haptic(HapticTypes.LightImpact);

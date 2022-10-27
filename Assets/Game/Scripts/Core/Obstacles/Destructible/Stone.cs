@@ -25,7 +25,6 @@ namespace Game.Core.Obstacles
 
         public override void GetDamage(int damage)
         {
-            Debug.Log(damage + " damage taken, health: " + health);
             base.GetDamage(damage);
             healthIndicator.SetHealth(health);
         }

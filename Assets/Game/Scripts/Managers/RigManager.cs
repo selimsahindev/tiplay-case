@@ -22,6 +22,7 @@ namespace Game.Managers
         private Stack<Fellow> collected = new Stack<Fellow>();
 
         private UIManager uiManager;
+        private PoolLibrary poolLib;
         private MoneyPopupHandler moneyPopupHandler;
 
         private void Awake()
@@ -33,11 +34,27 @@ namespace Game.Managers
             pistolRig.trigger.onTriggerEnter.AddListener(OnTriggerEnter);
             smgRig.trigger.onTriggerEnter.AddListener(OnTriggerEnter);
             shotgunRig.trigger.onTriggerEnter.AddListener(OnTriggerEnter);
+
+            poolLib = ServiceProvider.GetManager<PoolLibrary>();
         }
 
         private void Start()
         {
             AddNewFellow(firstFellow);
+
+            // Initalize extra stickmans according to stickman upgrade.
+            InitializeFellows(DataManager.Instance.StickmanUpgrade);
+        }
+
+        public void InitializeFellows(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Fellow fellow = poolLib.GetFellowPool.Pop();
+                fellow.gameObject.SetActive(true);
+                fellow.transform.position = transform.position;
+                AddNewFellow(fellow);
+            }
         }
 
         public void AddNewFellow(Fellow newFellow)
@@ -75,7 +92,7 @@ namespace Game.Managers
                 if (shotgunRig.IsFull())
                 {
                     Vector3 origin = GameManager.Instance.mainCamera.WorldToScreenPoint(transform.position);
-                    moneyPopupHandler.ShowMoneyPopup(origin, () => LevelManager.Instance.AddMoney(1));
+                    moneyPopupHandler.ShowMoneyPopup(1, origin, () => LevelManager.Instance.AddMoney(1));
                     newFellow.gameObject.SetActive(false);
                     isExtra = true;
                 }
@@ -111,8 +128,6 @@ namespace Game.Managers
             {
                 RemoveFellow();
             }
-
-            Debug.Log("remaining: " + FellowCount);
         }
 
         public void RemoveFellow()
@@ -142,8 +157,16 @@ namespace Game.Managers
 
         private void HandleGameStartedEvent()
         {
-            // Set the first character
-            firstFellow.Animator.SetTrigger(AnimationHash.Run);
+            // If there is only one character, play the running animation.
+            if (FellowCount == 1)
+            {
+                firstFellow.Animator.SetTrigger(AnimationHash.Run);
+            }
+        }
+
+        private void HandleStickmanUpgradedEvent()
+        {
+            InitializeFellows(1);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -164,11 +187,13 @@ namespace Game.Managers
         private void OnEnable()
         {
             EventBase.StartListening(EventType.GameStarted, HandleGameStartedEvent);
+            EventBase.StartListening(EventType.StickmanUpgraded, HandleStickmanUpgradedEvent);
         }
 
         private void OnDisable()
         {
             EventBase.StopListening(EventType.GameStarted, HandleGameStartedEvent);
+            EventBase.StopListening(EventType.StickmanUpgraded, HandleStickmanUpgradedEvent);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Game.Core
         [SerializeField] private MeshRenderer meshRenderer;
 
         public static Multiplier lastAchievedMultiplier;
+        public int Value => multiplier;
 
         private void OnTriggerEnter(Collider other)
         {

@@ -3,6 +3,10 @@ using UnityEngine.SceneManagement;
 using Game.Singletons;
 using Game.Core.Events;
 using EventType = Game.Core.Enums.EventType;
+using MoreMountains.NiceVibrations;
+using Game.Core;
+using Game.UI.Panels;
+using Game.Core.Constants;
 
 namespace Game.Managers
 {
@@ -47,7 +51,17 @@ namespace Game.Managers
             if (amount > 0)
             {
                 DataManager.Instance.SetMoney(DataManager.Instance.Money + amount);
-                EventBase.NotifyListeners(EventType.MoneyUpdated);
+                EventBase.NotifyListeners(EventType.MoneyAdded);
+                MMVibrationManager.Haptic(HapticTypes.LightImpact);
+            }
+        }
+
+        public void RemoveMoney(int amount)
+        {
+            if (amount > 0)
+            {
+                DataManager.Instance.SetMoney(DataManager.Instance.Money - amount);
+                EventBase.NotifyListeners(EventType.MoneyDecreased);
             }
         }
 
@@ -61,6 +75,15 @@ namespace Game.Managers
         {
             if (status)
             {
+                int endMoney = (GameSettings.BaseEndMoney + DataManager.Instance.IncomeUpgrade) * Multiplier.lastAchievedMultiplier.Value;
+
+                UIManager uiManager = ServiceProvider.GetManager<UIManager>();
+                uiManager.endPanel.SetEndMoneyText(endMoney);
+
+                Vector3 popUpTarget = uiManager.endPanel.endMoneyText.transform.position;
+                ServiceProvider.GetManager<MoneyPopupHandler>()
+                    .ShowMoneyPopup(10, popUpTarget, () => AddMoney(endMoney));
+
                 LevelUp();
             }
         }

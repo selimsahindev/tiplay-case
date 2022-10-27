@@ -27,7 +27,7 @@ namespace Game.Core
             transform.DOScale(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
 
             Vector3 moneyPos = GameManager.Instance.mainCamera.WorldToScreenPoint(transform.position);
-            moneyPopupHandler.ShowMoneyPopup(moneyPos, () => LevelManager.Instance.AddMoney(value));
+            moneyPopupHandler.ShowMoneyPopup(1, moneyPos, () => LevelManager.Instance.AddMoney(value));
         }
 
         private void PlayMoneySplash()

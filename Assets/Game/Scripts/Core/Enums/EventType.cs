@@ -4,8 +4,11 @@ namespace Game.Core.Enums
     {
         GameStarted,
         GameOver,
-        MoneyUpdated,
+        MoneyAdded,
+        MoneyDecreased,
         ShotsFired,
-        BarrelExploaded
+        BarrelExploaded,
+        StickmanUpgraded,
+        IncomeUpgraded
     }
 }

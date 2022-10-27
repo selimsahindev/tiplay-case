@@ -28,28 +28,37 @@ namespace Game.Managers
                 });
         }
 
-        public void ShowMoneyPopup(Vector3 origin, UnityAction onComplete = null)
+        public void ShowMoneyPopup(int count, Vector3 origin, UnityAction onComplete = null)
         {
-            float randomizePos = 4f;
+            float randomizePos = 35f;
+            float duration = 0.3f;
+            float delay = 0.1f;
 
-            RectTransform money = moneyPopupPool.Pop();
-            money.position = origin;
+            for (int i = 0; i < count; i++)
+            {
+                RectTransform money = moneyPopupPool.Pop();
+                money.position = origin;
 
-            Vector2 randomPos = money.anchoredPosition + new Vector2(Random.Range(-randomizePos, randomizePos), Random.Range(-randomizePos, randomizePos));
+                Vector2 randomOffset = new Vector2(Random.Range(-randomizePos, randomizePos), Random.Range(-randomizePos, randomizePos));
 
-            Sequence seq = DOTween.Sequence();
+                Sequence seq = DOTween.Sequence();
 
-            money.localScale = Vector3.one * 0.75f;
-            seq.Append(money.DOAnchorPos(money.anchoredPosition + randomPos, 0.35f).SetEase(Ease.OutSine));
-            seq.Append(money.DOScale(1f, 0.1f).SetEase(Ease.InOutSine));
-            seq.Append(money.DOMove(moneyIndicator.position, 0.35f).SetEase(Ease.OutSine));
-            seq.OnComplete(() => {
-                moneyPopupPool.Push(money);
-                onComplete?.Invoke();
-            });
-            seq.Play();
+                money.localScale = Vector3.one * 0.75f;
+                seq.Append(money.DOAnchorPos(money.anchoredPosition + randomOffset, duration).SetEase(Ease.OutSine));
+                seq.Append(money.DOScale(1f, 0.1f).SetEase(Ease.InOutSine));
+                seq.Append(money.DOMove(moneyIndicator.position, duration).SetEase(Ease.OutSine).SetDelay(delay));
+                seq.OnComplete(() => {
+                    moneyPopupPool.Push(money);
+                });
+                seq.Play();
 
-            money.gameObject.SetActive(true);
+                money.gameObject.SetActive(true);
+                
+                if (onComplete != null)
+                {
+                    DelayHandler.WaitAndInvoke(onComplete.Invoke, 2 * duration + 0.1f + delay);
+                }
+            }
         }
     }
 }

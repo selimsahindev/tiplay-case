@@ -16,32 +16,24 @@ namespace Game.Core
         [SerializeField] private Material redMaterial;
         [SerializeField] private Material greyMaterial;
 
-        private PoolLibrary poolLib;
         public Collider col { get; private set; }
 
         [HideInInspector] public UnityEvent onGateIsUsed = new UnityEvent();
 
         private void Awake()
         {
-            poolLib = ServiceProvider.GetManager<PoolLibrary>();
             col = GetComponent<Collider>();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            RigManager rigManager = other.GetComponent<RigManager>();
+            RigManager rigManager = other.GetComponentInParent<RigManager>();
 
             if (rigManager != null)
             {
                 if (value > 0)
                 {
-                    for (int i = 0; i < value; i++)
-                    {
-                        Fellow fellow = poolLib.GetFellowPool.Pop();
-                        fellow.gameObject.SetActive(true);
-                        fellow.transform.position = rigManager.transform.position;
-                        rigManager.AddNewFellow(fellow);
-                    }
+                    rigManager.InitializeFellows(value);
                 }
                 else if (value < 0)
                 {
