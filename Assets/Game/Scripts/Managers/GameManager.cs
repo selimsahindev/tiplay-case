@@ -8,11 +8,15 @@ namespace Game.Managers
     [DefaultExecutionOrder(-1)]
     public class GameManager : SingletonMonoBehaviour<GameManager>, IProvidable
     {
+        public bool IsFinishReached { get; set; }
+
         public bool IsGameActive
         {
             get;
             private set;
         }
+
+        public Camera mainCamera { get; private set; }
 
         private void Awake()
         {
@@ -21,6 +25,10 @@ namespace Game.Managers
             ServiceProvider.Register(this);
 
             IsGameActive = false;
+            IsFinishReached = false;
+
+            mainCamera = Camera.main;
+
             DG.Tweening.DOTween.SetTweensCapacity(200, 100);
         }
 

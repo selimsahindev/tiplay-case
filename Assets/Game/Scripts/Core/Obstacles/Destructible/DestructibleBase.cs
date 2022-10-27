@@ -1,4 +1,5 @@
 using DG.Tweening;
+using MoreMountains.NiceVibrations;
 using UnityEngine;
 
 namespace Game.Core.Obstacles
@@ -11,7 +12,7 @@ namespace Game.Core.Obstacles
         {
             health -= damage;
             
-            if (health < 0)
+            if (health <= 0)
             {
                 health = 0;
                 BreakApart();
@@ -30,6 +31,8 @@ namespace Game.Core.Obstacles
         {
             // Handle Particles Etc.
             Disappear();
+
+            MMVibrationManager.Haptic(HapticTypes.LightImpact);
         }
     }
 }

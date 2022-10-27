@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4441294327989580521}
   - component: {fileID: 3100895573153565346}
-  - component: {fileID: 254892317466863395}
+  - component: {fileID: 4366429901431821055}
   m_Layer: 0
   m_Name: RigManager
   m_TagString: Player
@@ -53,8 +53,8 @@ MonoBehaviour:
   pistolRig: {fileID: 6459038346010242033}
   smgRig: {fileID: 1314136596084094365}
   shotgunRig: {fileID: 6985936026786126087}
---- !u!135 &254892317466863395
-SphereCollider:
+--- !u!136 &4366429901431821055
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -63,9 +63,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Radius: 0.21
+  m_Height: 0.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!1001 &1324442889691615172
 PrefabInstance:
   m_ObjectHideFlags: 0

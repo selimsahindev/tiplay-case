@@ -9,12 +9,14 @@ namespace Game.Core.Obstacles
     public class GiantHuman : DestructibleBase
     {
         [SerializeField] private float runSpeed;
+        [SerializeField] private float runDistance;
         [SerializeField] private Animator animator;
         [SerializeField] private HealthIndicatorUI healthIndicator;
         [SerializeField] private Transform stickman;
 
         private bool isHit = false;
         private bool isRunning = false;
+        private float distanceTraveled = 0f;
 
         protected override void Awake()
         {
@@ -45,7 +47,14 @@ namespace Game.Core.Obstacles
 
         private void HandleMovement()
         {
-            transform.position += Vector3.forward * runSpeed * Time.deltaTime;
+            float moveDelta = runSpeed * Time.deltaTime;
+            transform.position += Vector3.forward * moveDelta;
+            distanceTraveled += moveDelta;
+
+            if (distanceTraveled >= runDistance)
+            {
+                StopRunning();
+            }
         }
 
         private void StartRunning()
@@ -58,6 +67,17 @@ namespace Game.Core.Obstacles
             seq.OnComplete(() => isRunning = true);
 
             animator.SetTrigger(AnimationHash.Run);
+        }
+
+        private void StopRunning()
+        {
+            isRunning = false;
+
+            Sequence seq = DOTween.Sequence();
+
+            seq.Append(stickman.DORotate(Vector3.up * 180f, 0.2f));
+
+            animator.SetTrigger(AnimationHash.Idle);
         }
 
         private void OnTriggerEnter(Collider other)

@@ -1,3 +1,4 @@
+using Game.Core.Events;
 using Game.Managers;
 using Game.UI;
 using UnityEngine;
@@ -42,18 +43,20 @@ namespace Game.Core.Obstacles
 
                 if (destructible != null)
                 {
-                    Debug.Log(destructible.name);
                     destructible.BreakApart();
                 }
             }
 
             PlayExplosionParticle();
+
+            EventBase.NotifyListeners(Enums.EventType.BarrelExploaded);
         }
 
         private void PlayExplosionParticle()
         {
             ParticleSystem particle = particleLibrary.GetParticlePool(Enums.ParticleNames.Explosion).Pop();
             particle.gameObject.SetActive(true);
+            particle.transform.localScale = Vector3.one * 1.2f;
             particle.transform.position = transform.position.Modify(y: 1f);
             particle.Play();
             DelayHandler.WaitAndInvoke(() => {

@@ -76,8 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979182dc89a841b4ba6bdee70a0d2e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneySplashParticle: {fileID: 3387749055066055219, guid: 0f541c77f8c9e4c2c9eac6e0547fbb49,
-    type: 3}
+  value: 1
 --- !u!1001 &6017822693266724112
 PrefabInstance:
   m_ObjectHideFlags: 0

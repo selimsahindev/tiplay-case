@@ -9,6 +9,12 @@ namespace Game.Core.Obstacles
     {
         [SerializeField] private HealthIndicatorUI healthIndicator;
         [SerializeField] private Transform[] itemsOnTop;
+        [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private bool isBonusObstacle = false;
+
+        [Space, Header("Materials")]
+        [SerializeField] private Material defaultMaterial;
+        [SerializeField] private Material greyMaterial;
 
         protected override void Awake()
         {
@@ -19,6 +25,7 @@ namespace Game.Core.Obstacles
 
         public override void GetDamage(int damage)
         {
+            Debug.Log(damage + " damage taken, health: " + health);
             base.GetDamage(damage);
             healthIndicator.SetHealth(health);
         }
@@ -50,7 +57,7 @@ namespace Game.Core.Obstacles
                     jumpPos = item.localPosition.Modify(y: 0f) + Vector3.forward * 4f;
                 }
 
-                item.DOLocalJump(jumpPos, 0.8f, 1, 0.25f).SetEase(Ease.InOutSine);
+                item.DOLocalJump(jumpPos, 0.8f, 1, 0.37f).SetEase(Ease.InOutSine);
             }
         }
 
@@ -60,14 +67,28 @@ namespace Game.Core.Obstacles
 
             if (rigManager != null)
             {
-                rigManager.RemoveFellows(damage);
-                Disappear();
+                if (isBonusObstacle)
+                {
+                    Disappear();
+                    rigManager.RemoveFellows(rigManager.FellowCount);
+                    GameManager.Instance.EndGame(true);
+                }
+                else
+                {
+                    rigManager.RemoveFellows(damage);
+                    Disappear();
+                }
             }
         }
 
         private void OnValidate()
         {
             healthIndicator?.SetHealth(health);
+            
+            if (meshRenderer != null)
+            {
+                meshRenderer.material = isBonusObstacle ? greyMaterial : defaultMaterial;
+            }
         }
     }
 }

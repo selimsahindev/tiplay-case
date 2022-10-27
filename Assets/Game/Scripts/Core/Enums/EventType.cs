@@ -5,6 +5,7 @@ namespace Game.Core.Enums
         GameStarted,
         GameOver,
         MoneyUpdated,
-        ShotsFired
+        ShotsFired,
+        BarrelExploaded
     }
 }

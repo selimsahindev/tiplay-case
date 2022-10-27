@@ -3,6 +3,7 @@ using Game.Managers;
 using TMPro;
 using Game.Core.Events;
 using EventType = Game.Core.Enums.EventType;
+using DG.Tweening;
 
 namespace Game.UI
 {
@@ -39,6 +40,9 @@ namespace Game.UI
 
         private void HandleMoneyUpdatedEvent()
         {
+            transform.DOKill(true);
+            transform.DOScale(Vector3.one * 1.1f, 0.2f).SetLoops(2, LoopType.Yoyo);
+
             SetMoney(DataManager.Instance.Money);
         }
 

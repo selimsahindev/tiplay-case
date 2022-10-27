@@ -5,6 +5,7 @@ namespace Game.Core.Constants
 {
     public static class AnimationHash
     {
+        public static readonly int Idle = Animator.StringToHash("Idle");
         public static readonly int Run = Animator.StringToHash("Run");
         public static readonly int Pose1 = Animator.StringToHash("Pose1");
         public static readonly int Pose2 = Animator.StringToHash("Pose2");

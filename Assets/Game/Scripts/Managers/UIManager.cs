@@ -12,6 +12,7 @@ namespace Game.Managers
     {
         public MainPanel mainPanel;
         public GamePanel gamePanel;
+        public EndPanel endPanel;
         public CommonPanel commonPanel;
 
         private void Awake()
@@ -23,6 +24,7 @@ namespace Game.Managers
         {
             mainPanel.SetActiveImmediately(true);
             gamePanel.SetActiveImmediately(false);
+            endPanel.SetActiveImmediately(false);
             commonPanel.SetActiveImmediately(true);
         }
 
@@ -32,14 +34,32 @@ namespace Game.Managers
             gamePanel.SetActiveSmooth(true);
         }
 
+        private void HandleGameOverEvent(bool status)
+        {
+            gamePanel.SetActiveSmooth(false);
+            commonPanel.SetActiveSmooth(false);
+            endPanel.SetActiveSmooth(true);
+
+            if (status)
+            {
+                endPanel.EnableSuccessScreen();
+            }
+            else
+            {
+                endPanel.EnableFailScreen();
+            }
+        }
+
         private void OnEnable()
         {
             EventBase.StartListening(EventType.GameStarted, HandleGameStartedEvent);
+            EventBase.StartListening(EventType.GameOver, HandleGameOverEvent);
         }
 
         private void OnDisable()
         {
             EventBase.StopListening(EventType.GameStarted, HandleGameStartedEvent);
+            EventBase.StopListening(EventType.GameOver, HandleGameOverEvent);
         }
     }
 }

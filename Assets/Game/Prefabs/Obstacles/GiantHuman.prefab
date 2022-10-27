@@ -80,7 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   health: 10
-  runSpeed: 6.5
+  runSpeed: 5.5
+  runDistance: 15
   animator: {fileID: 5177587117123413519}
   healthIndicator: {fileID: 4181327677367103875}
   stickman: {fileID: 1241393542526041205}

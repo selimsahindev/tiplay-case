@@ -12,9 +12,12 @@ namespace Game.Core
         public int value = 20;
         private Collider col;
 
+        private MoneyPopupHandler moneyPopupHandler;
+
         private void Awake()
         {
             col = GetComponent<Collider>();
+            moneyPopupHandler = ServiceProvider.GetManager<MoneyPopupHandler>();
         }
 
         private void Collect()
@@ -23,8 +26,8 @@ namespace Game.Core
             PlayMoneySplash();
             transform.DOScale(0f, 0.5f).OnComplete(() => gameObject.SetActive(false));
 
-            DataManager.Instance.SetMoney(DataManager.Instance.Money + value);
-            EventBase.NotifyListeners(EventType.MoneyUpdated);
+            Vector3 moneyPos = GameManager.Instance.mainCamera.WorldToScreenPoint(transform.position);
+            moneyPopupHandler.ShowMoneyPopup(moneyPos, () => LevelManager.Instance.AddMoney(value));
         }
 
         private void PlayMoneySplash()

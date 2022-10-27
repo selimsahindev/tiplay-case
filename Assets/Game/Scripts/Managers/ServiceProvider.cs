@@ -1,3 +1,4 @@
+using UnityEngine;
 using System;
 using System.Collections.Generic;
 
@@ -21,6 +22,11 @@ namespace Game.Managers
         {
             RegisterDictionary.Add(typeof(T), target);
             return target;
+        }
+
+        public static void ResetProvider()
+        {
+            RegisterDictionary.Clear();
         }
     }
 }

@@ -2,6 +2,7 @@ using DG.Tweening;
 using Game.Core.Events;
 using Game.Core.Obstacles;
 using Game.Managers;
+using MoreMountains.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,8 +47,7 @@ namespace Game.Core.RigBase
 
         private int GetPower()
         {
-            // TODO: Calculate this dynamically later.
-            return Mathf.Clamp(rig.fellows.Count, 1, 3);
+            return Mathf.Clamp(rig.fellows.Count, 1, 10);
         }
 
         private void Fire(DestructibleBase destructable)
@@ -56,6 +56,8 @@ namespace Game.Core.RigBase
             rig.PlayShootingAnimation();
 
             SpawnBullets(bulletAmount);
+
+            MMVibrationManager.Haptic(HapticTypes.LightImpact);
 
             // Notify listeners (Camera will shake upon this.)
             EventBase.NotifyListeners(Enums.EventType.ShotsFired);

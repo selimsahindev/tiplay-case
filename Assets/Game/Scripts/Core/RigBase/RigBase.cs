@@ -23,6 +23,8 @@ namespace Game.Core.RigBase
 
         protected FellowColors_SO colors;
         protected List<Sequence> runningSequences = new List<Sequence>();
+
+        public Trigger trigger;
         
         public ShootHandler ShootHandler
         {

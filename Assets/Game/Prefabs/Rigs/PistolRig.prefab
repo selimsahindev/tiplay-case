@@ -139,9 +139,11 @@ GameObject:
   - component: {fileID: 3620392624157785704}
   - component: {fileID: 2779464841504175551}
   - component: {fileID: 8064446310580474969}
+  - component: {fileID: 573629000508855503}
+  - component: {fileID: 31564330500964528}
   m_Layer: 0
   m_Name: PistolRig
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,6 +194,7 @@ MonoBehaviour:
     pose: 4
     color: 4
   fellows: []
+  trigger: {fileID: 573629000508855503}
   slidePartsParent: {fileID: 4308766387022450830}
 --- !u!114 &8064446310580474969
 MonoBehaviour:
@@ -206,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 5
-  bulletSize: 0.3
+  bulletSize: 0.15
   bulletAmount: 1
   bulletSeperation: 0
   timeBetweenShots: 0.2
@@ -215,6 +218,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   isActive: 0
+--- !u!114 &573629000508855503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4239643616502578109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7058edbd2f90429459c3867801057ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &31564330500964528
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4239643616502578109}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.25, y: 1, z: 0.8}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &4351846981405788938
 GameObject:
   m_ObjectHideFlags: 0

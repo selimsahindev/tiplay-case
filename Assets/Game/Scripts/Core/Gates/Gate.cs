@@ -2,6 +2,7 @@ using UnityEngine;
 using Game.Managers;
 using UnityEngine.Events;
 using TMPro;
+using MoreMountains.NiceVibrations;
 
 namespace Game.Core
 {
@@ -36,7 +37,6 @@ namespace Game.Core
                 {
                     for (int i = 0; i < value; i++)
                     {
-                        Debug.Log("added");
                         Fellow fellow = poolLib.GetFellowPool.Pop();
                         fellow.gameObject.SetActive(true);
                         fellow.transform.position = rigManager.transform.position;
@@ -51,6 +51,8 @@ namespace Game.Core
                 surfaceMeshRenderer.material = greyMaterial;
                 col.enabled = false;
                 onGateIsUsed.Invoke();
+
+                MMVibrationManager.Haptic(HapticTypes.LightImpact);
             }
         }
 

@@ -52,6 +52,10 @@ MonoBehaviour:
   health: 4
   healthIndicator: {fileID: 2679378068464552361}
   itemsOnTop: []
+  meshRenderer: {fileID: 6958875272013847839}
+  isBonusObstacle: 0
+  defaultMaterial: {fileID: 2100000, guid: 6acd1384dd89c0c4fad507e6a29ce06d, type: 2}
+  greyMaterial: {fileID: 2100000, guid: bd718d76c479d5346bcdc6049d4f50aa, type: 2}
 --- !u!136 &5958046974945138048
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -89,6 +93,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8598340983033792003}
     m_Modifications:
+    - target: {fileID: 1154027422053586956, guid: fcb71ab32faec444aa59ab5f0930b0e6,
+        type: 3}
+      propertyPath: m_text
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4756200627055592487, guid: fcb71ab32faec444aa59ab5f0930b0e6,
         type: 3}
       propertyPath: m_Pivot.x
@@ -308,6 +317,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6206705f431beb4bac82415337e1c26, type: 3}
+--- !u!23 &6958875272013847839 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: f6206705f431beb4bac82415337e1c26,
+    type: 3}
+  m_PrefabInstance: {fileID: 8598340982808773019}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8131751518614152816 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f6206705f431beb4bac82415337e1c26,
