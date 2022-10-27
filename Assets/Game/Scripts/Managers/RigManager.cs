@@ -44,6 +44,9 @@ namespace Game.Managers
 
             // Initalize extra stickmans according to stickman upgrade.
             InitializeFellows(DataManager.Instance.StickmanUpgrade);
+
+            // Sync progress indicator.
+            uiManager.gamePanel.progressUI.MoveArrow(FellowCount);
         }
 
         public void InitializeFellows(int count)
@@ -132,12 +135,6 @@ namespace Game.Managers
 
         public void RemoveFellow()
         {
-            if (collected.Count == 0 && !GameManager.Instance.IsFinishReached)
-            {
-                GameManager.Instance.EndGame(false);
-                return;
-            }
-
             if (collected.TryPop(out Fellow fellow))
             {
                 float duration = 0.35f;
@@ -152,6 +149,12 @@ namespace Game.Managers
 
                 // Move progress indicator.
                 uiManager.gamePanel.progressUI.MoveArrow(FellowCount);
+            }
+
+            if (FellowCount < 1 && !GameManager.Instance.IsFinishReached)
+            {
+                GameManager.Instance.EndGame(false);
+                return;
             }
         }
 

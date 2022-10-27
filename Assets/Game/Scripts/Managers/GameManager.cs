@@ -34,14 +34,20 @@ namespace Game.Managers
 
         public void StartGame()
         {
-            IsGameActive = true;
-            EventBase.NotifyListeners(EventType.GameStarted);
+            if (!IsGameActive)
+            {
+                IsGameActive = true;
+                EventBase.NotifyListeners(EventType.GameStarted);
+            }
         }
 
         public void EndGame(bool status)
         {
-            IsGameActive = false;
-            EventBase.NotifyListeners(EventType.GameOver, status);
+            if (IsGameActive)
+            {
+                IsGameActive = false;
+                EventBase.NotifyListeners(EventType.GameOver, status);
+            }
         }
     }
 }

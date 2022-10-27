@@ -32,9 +32,8 @@ namespace Game.Core
                 Color color = meshRenderer.material.color;
                 meshRenderer.material.DOColor(Color.white, 0.25f)
                     .SetEase(Ease.OutQuart)
-                    .SetDelay(2f)
                     .OnComplete(() => {
-                        meshRenderer.material.DOColor(color, 2f).SetEase(Ease.OutSine);
+                        meshRenderer.material.DOColor(color, 2f).SetEase(Ease.OutSine).SetDelay(2f);
                     });
             }
         }

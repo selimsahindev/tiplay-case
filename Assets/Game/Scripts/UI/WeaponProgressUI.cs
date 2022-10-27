@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
-using UnityEngine.Rendering.UI;
 
 namespace Game.UI
 {
@@ -15,23 +13,12 @@ namespace Game.UI
 
         public List<RectTransform> progressionNodes = new List<RectTransform>();
 
-        private int currentIndex = 0;
-
         private Vector2 elementSize;
         private Vector2 baseAnchoredPosition;
 
         private void Awake()
         {
             Prepare();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                int index = (currentIndex + 1) % progressionNodes.Count;
-                MoveArrow(index);
-            }
         }
 
         private void Prepare()
@@ -56,8 +43,6 @@ namespace Game.UI
 
             nodesParent.DOKill();
             nodesParent.DOAnchorPosX(baseAnchoredPosition.x - nodeIndex * elementSize.x, 0.15f).SetEase(Ease.InOutSine);
-
-            currentIndex = nodeIndex;
 
             SetText(nodeIndex);
         }
